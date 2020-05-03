@@ -1,5 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 
-export default function Button() {
-  return <button>Click Me</button>;
+export default function Button(props) {
+  const [clicks, setClicks] = useState(0);
+  function buttonClicked(e) {
+    setClicks(clicks + 1);
+  }
+  return <button onClick={buttonClicked}>{clicks}</button>;
 }

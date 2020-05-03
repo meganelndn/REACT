@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import Nav from "./components/Nav";
 import Main from "./components/Main";
 
 export default function App() {
-  const cards = [
+  const [cards, setCards] = useState([
     {
       title: "Make it dynamic",
       list: "todo",
@@ -20,11 +20,30 @@ export default function App() {
       color: "lightcoral",
       assignedTo: ["jofh"],
     },
-  ];
+  ]);
 
   return (
     <div className="App">
       <Nav />
+
+      <button
+        onClick={() =>
+          setCards(
+            //.concat => creates a new array, a copy (.push)
+            cards.concat({
+              title: "OMG did that just happen?",
+              list: "todo",
+              added: Date.now(),
+              id: Math.random(),
+              color: "lightblue",
+              assignedTo: ["jofh"],
+            })
+          )
+        }
+      >
+        Awesome
+      </button>
+
       <Main cards={cards} />
     </div>
   );

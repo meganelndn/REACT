@@ -13,10 +13,14 @@ export default function Card(props) {
     props.onCardMove(props._id, where);
   }
 
+  const style = {
+    backgroundColor: props.color,
+  };
+
   return (
     <li>
       <h3>{props.title}</h3>
-      <p>{props.color}</p>
+      <p style={style}>{props.color}</p>
       <Button />
       <button onClick={onDelete}>Delete Me</button>
       <button onClick={() => onMove("todo")}>Move to TODO</button>

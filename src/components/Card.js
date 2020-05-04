@@ -6,11 +6,11 @@ export default function Card(props) {
 
   //callback function
   function onDelete() {
-    props.onCardDelete(props.id);
+    props.onCardDelete(props._id);
   }
 
   function onMove(where) {
-    props.onCardMove(props.id, where);
+    props.onCardMove(props._id, where);
   }
 
   return (

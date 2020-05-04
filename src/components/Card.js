@@ -3,19 +3,25 @@ import Button from "./Button";
 
 export default function Card(props) {
   console.log(props);
+
   //callback function
   function onDelete() {
     props.onCardDelete(props.id);
   }
+
+  function onMove(where) {
+    props.onCardMove(props.id, where);
+  }
+
   return (
     <li>
       <h3>{props.title}</h3>
       <p>{props.color}</p>
       <Button />
       <button onClick={onDelete}>Delete Me</button>
-      <button>Move to TODO</button>
-      <button>Move to DOING</button>
-      <button>Move to DONE</button>
+      <button onClick={() => onMove("todo")}>Move to TODO</button>
+      <button onClick={() => onMove("doing")}>Move to DOING</button>
+      <button onClick={() => onMove("done")}>Move to DONE</button>
     </li>
   );
 }

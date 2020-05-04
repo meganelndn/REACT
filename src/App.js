@@ -37,8 +37,17 @@ export default function App() {
     );
   }
 
-  function onCardMove(data) {
-    console.log(data);
+  function onCardMove(id, whereTo) {
+    console.log(id, whereTo);
+
+    const nextCards = cards.map((card) => {
+      if (card.id === id) {
+        console.log("match");
+        card.list = whereTo;
+      }
+      return card;
+    });
+    setCards(nextCards);
   }
 
   function onCardDelete(id) {

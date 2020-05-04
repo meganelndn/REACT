@@ -67,6 +67,8 @@ export default function App() {
         Awesome
       </button> */}
 
+      {cards.length === 0 && <h2>Loading</h2>}
+
       <Main
         onCardDelete={onCardDelete}
         onCardMove={onCardMove}

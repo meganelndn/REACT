@@ -22,11 +22,37 @@ export default function App() {
     },
   ]);
 
+  function onFormSubmit(data) {
+    console.log("form submitted", data);
+    setCards(
+      //.concat => creates a new array, a copy (.push)
+      cards.concat({
+        title: "OMG did that just happen?",
+        list: "todo",
+        added: Date.now(),
+        id: Math.random(),
+        color: "lightblue",
+        assignedTo: ["jofh"],
+      })
+    );
+  }
+
+  function onCardMove(data) {
+    console.log(data);
+  }
+
+  function onCardDelete(id) {
+    console.log(id);
+
+    const nextCards = cards.filter((card) => card.id !== id);
+    setCards(nextCards);
+  }
+
   return (
     <div className="App">
       <Nav />
 
-      <button
+      {/* <button
         onClick={() =>
           setCards(
             //.concat => creates a new array, a copy (.push)
@@ -42,9 +68,14 @@ export default function App() {
         }
       >
         Awesome
-      </button>
+      </button> */}
 
-      <Main cards={cards} />
+      <Main
+        onCardDelete={onCardDelete}
+        onCardMove={onCardMove}
+        onFormSubmit={onFormSubmit}
+        cards={cards}
+      />
     </div>
   );
 }

@@ -18,7 +18,7 @@ export function getCards(callback) {
 
 // "POST"
 export function addCard(callback, cards, data) {
-  const setCards = JSON.stringify(data);
+  const postData = JSON.stringify(data);
 
   fetch(endpoint, {
     method: "post",
@@ -27,8 +27,45 @@ export function addCard(callback, cards, data) {
       "x-apiKey": apiKey,
       "cache-control": "no-cache",
     },
-    body: setCards,
+    body: postData,
   })
     .then((res) => res.json())
     .then((response) => callback(cards.concat(response)));
 }
+
+function moveCard(data, id) {
+  let postData = JSON.stringify(data);
+
+  fetch(endpoint + "/" + id, {
+    method: "put",
+    headers: {
+      "Content-Type": "application/json; charset=utf-8",
+      "x-apiKey": apiKey,
+      "cache-control": "no-cache",
+    },
+    body: postData,
+  })
+    .then((d) => d.json())
+    .then((t) => console.log(t));
+}
+
+function deleteCard(id) {
+  fetch(endpoint + "/" + id, {
+    method: "delete",
+    headers: {
+      "Content-Type": "application/json; charset=utf-8",
+      "x-apiKey": apiKey,
+      "cache-control": "no-cache",
+    },
+  })
+    .then((res) => res.json())
+    .then((data) => console.log(data));
+}
+
+// new variable for improved legibility of RestDB functions in App.js
+export const RestDB = {
+  getCards,
+  addCard,
+  moveCard,
+  deleteCard,
+};

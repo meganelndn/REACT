@@ -1,24 +1,24 @@
 import React, { useState, useEffect } from "react";
 import Nav from "./components/Nav";
 import Main from "./components/Main";
-import { getCards, addCard } from "./modules/restdb";
+import { RestDB } from "./modules/restdb";
 
 export default function App() {
   const [cards, setCards] = useState([]);
 
   // "GET"
   useEffect(() => {
-    getCards(setCards);
+    RestDB.getCards(setCards);
     // empty array to stop it from fetching continuously (infinite loop)
   }, []);
 
   function onFormSubmit(data) {
     console.log("form submitted", data);
-    addCard(setCards, cards, data);
+    // "POST"
+    RestDB.addCard(setCards, cards, data);
   }
 
   function onCardMove(_id, whereTo) {
-    // todo: "PUT"
     console.log(_id, whereTo);
 
     const nextCards = cards.map((card) => {
@@ -28,6 +28,13 @@ export default function App() {
       }
       return card;
     });
+    // "PUT"
+    RestDB.moveCard(
+      {
+        list: whereTo,
+      },
+      _id
+    );
     setCards(nextCards);
   }
 
@@ -36,6 +43,7 @@ export default function App() {
     const nextCards = cards.filter((card) => card._id !== _id);
 
     // todo: "DELETE"
+    RestDB.deleteCard(_id);
     setCards(nextCards);
   }
 

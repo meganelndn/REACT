@@ -17,4 +17,6 @@ export default function Counter(props) {
       <Dumb something={count} />
     </div>
   );
+
+  
 }

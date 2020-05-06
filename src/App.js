@@ -42,7 +42,7 @@ export default function App() {
     console.log(_id);
     const nextCards = cards.filter((card) => card._id !== _id);
 
-    // todo: "DELETE"
+    // "DELETE"
     RestDB.deleteCard(_id);
     setCards(nextCards);
   }

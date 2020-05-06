@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Button from "muicss/lib/react/button";
 import Input from "muicss/lib/react/input";
+import { CirclePicker } from "react-color";
 
 import styles from "./Form.module.css";
 
@@ -26,15 +27,15 @@ export default function Form(props) {
     setTitle(e.target.value);
   }
 
-  function colorChanged(e) {
-    setColor(e.target.value);
+  function colorChanged(color) {
+    setColor(color.hex);
   }
 
-  const inputStyle = {
+  /*  const inputStyle = {
     borderColor: title.length > 0 ? "green" : "red",
     borderWidth: "1px",
     borderStyle: "solid",
-  };
+  }; */
 
   return (
     <form className={styles.cardForm} onSubmit={submit}>
@@ -55,6 +56,7 @@ export default function Form(props) {
           value={color}
         />
       </label>
+      <CirclePicker value={color} onChange={colorChanged} />
       <Button color="primary" disabled={title.length === 0} type="submit">
         Save
       </Button>
